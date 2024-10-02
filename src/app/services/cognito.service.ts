@@ -18,15 +18,23 @@ export class CognitoService {
     return Auth.signUp({
       username: user.email,
       password: user.password,
-      attributes: {
-        email: user.email,
-        given_name: user.giveName,
-        family_name: user.familyName
-      }
     })
   }
 
   public confirmSignUp(user: User) :Promise<any> {
-    return Auth.confirmSignUp(user.email, user.password);
+    return Auth.confirmSignUp(user.email, user.code);
+  }
+
+  public getUser(user: User): Promise<any> {
+    return Auth.currentUserInfo();
+  }
+
+  //Login with email and passowrd
+  public signIn(user: User):Promise<any> {
+    return Auth.signIn(user.email, user.password);
+  }
+
+  public signOut(): Promise<any> {
+    return Auth.signOut();
   }
 }

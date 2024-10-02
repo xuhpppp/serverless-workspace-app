@@ -1,8 +1,8 @@
 export interface User {
+  username: string;
   email: string;
   password: string;
-  giveName: string;
-  familyName: string;
+  confirmpassword: string;
   code: string;
   showPassword: boolean;
 }
