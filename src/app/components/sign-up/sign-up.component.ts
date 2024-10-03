@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CognitoService } from '../../services/cognito.service';
 import { User } from '../../models/user';
-import { MessageModalComponent } from "../message-modal/message-modal.component";
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,8 +12,7 @@ import { MessageModalComponent } from "../message-modal/message-modal.component"
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    MessageModalComponent
+    ReactiveFormsModule
 ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
@@ -21,12 +20,11 @@ import { MessageModalComponent } from "../message-modal/message-modal.component"
 export class SignUpComponent implements OnInit{
   user: User | undefined;
   isConfirm: boolean = false;
-  alertMessage: string = '';
-  showAlert: boolean = false;
 
   constructor(
     private router: Router,
-    private cognitoService: CognitoService
+    private cognitoService: CognitoService,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit(): void {
@@ -64,8 +62,8 @@ export class SignUpComponent implements OnInit{
   }
 
   private displayAlert(message: string) {
-    this.alertMessage = message;
-    this.showAlert = true;
-
+    this.notification.blank("Error", message).onClick.subscribe(() => {
+      console.log('notification clicked!');
+    });
   }
 }
