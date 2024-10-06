@@ -19,7 +19,10 @@
           Show Password
         </div>
         <p>Already a member? <a href="/sign-in">Sign in</a></p>
-        <button (click)="signUpWidthCognito()">Register</button>
+
+        <!-- Skeleton hiển thị khi loading -->
+        <nz-skeleton *ngIf="loading" [nzActive]="true" [nzParagraph]="false" [nzTitle]="true"></nz-skeleton>
+        <button *ngIf="!loading" (click)="signUpWidthCognito()">Register</button>
       </div>
     </div>
 
@@ -31,7 +34,8 @@
 
       <div class="form">
         <input type="text" name="verificationCode" placeholder="Enter verification code" [(ngModel)]="user.code">
-        <button (click)="confirmSignUp()">Confirm</button>
+        <nz-skeleton *ngIf="loading" [nzActive]="true" [nzParagraph]="false" [nzTitle]="true"></nz-skeleton>
+        <button *ngIf="!loading" (click)="confirmSignUp()">Confirm</button>
       </div>
     </div>
 

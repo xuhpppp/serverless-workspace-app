@@ -18,7 +18,9 @@
         </div>
         <p class="forgot-password">Forgot password</p>
         <p>Not a remember? <a href="/sign-up">Sign Up</a></p>
-        <button (click)="signInWithCognito()">Login</button>
+
+        <nz-skeleton *ngIf="loading" [nzActive]="true" [nzParagraph]="false" [nzTitle]="true"></nz-skeleton>
+        <button *ngIf="!loading" (click)="signInWithCognito()">Login</button>
       </div>
     </div>
   </div>
